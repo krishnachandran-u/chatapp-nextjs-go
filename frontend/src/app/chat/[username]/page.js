@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState, useRef } from "react";
+import { IoMdSend } from "react-icons/io";
 
 const Chat = ({params}) => {
     const inputRef = useRef("");
@@ -38,6 +39,7 @@ const Chat = ({params}) => {
                 receiver_id: receiverID,
                 content: inputRef.current.value
             };
+            setMessage(prevMessages => [...prevMessages, message]);
 
             socket.send(JSON.stringify(message));
             inputRef.current.value = "";
@@ -46,13 +48,13 @@ const Chat = ({params}) => {
     }
 
     return (
-        <div className = "bg-white w-screen h-screen text-black flex flex-col justify-between items-center p-[24px] gap-[16px] lg:p-[96px] md:text-2xl">
-           <div className = "w-full bg-slate-100 overflow-y-scroll h-full rounded-[16px] p-[16px]">
+        <div className = "bg-white w-screen h-screen text-black flex flex-col justify-between items-center p-[24px] gap-[16px] lg:p-[96px] md:text-2xl md:p-[32px]">
+           <div className = "w-full bg-slate-100 overflow-y-scroll h-full rounded-[16px] p-[16px] flex flex-col gap-[16px]">
                 {messages.map((message, index) => (
-                    <div className = "border-[1px] border-black rounded-[8px] flex flex-col gap-[8px] p-[8px]">
+                    <div className = {`border-[1px] border-black rounded-[8px] flex flex-col gap-[8px] md:p-[16px] p-[8px] ${message.sender_id == params.username? "items-end lg:ml-[200px] md:ml-[100px] ml-[50px]" : "lg:mr-[200px] md:mr-[100px] mr-[50px]"}`}>
                         <div className = "md:text-base font-bold">Sender: {message.sender_id}</div>
                         {/*<div className = "md:text-base">Receiver: {message.receiver_id}</div>*/}
-                        <div className = "md:text-2xl text-xl">Message: {message.content} </div>
+                        <div className = "md:text-2xl text-xl"> {/*Message:*/} {message.content} </div>
                     </div>
                 ))}
             </div> 
@@ -60,7 +62,12 @@ const Chat = ({params}) => {
             <input className = "border-[1px] border-1 border-slate-300 rounded-[4px] p-[8px] md:w-[500px] w-[200px]" type = "text" placeholder = "receiver" ref = {receiverRef} />
             <div className = "w-full flex flex-row gap-[10px]">
                 <input className = "border-[1px] border-1 border-slate-300 rounded-[4px] p-[8px] w-full" type = "text" placeholder = "message" ref = {inputRef}/>
-                <button className = "bg-black text-white rounded-[8px] p-[8px] hover:bg-slate-500 transition-colors duration-300" onClick = {() => sendMessage(receiverRef.current.value)}>send</button>
+                <button 
+                    className = "bg-black text-white rounded-[8px] p-[8px] hover:bg-slate-500 transition-colors duration-300 lg:size-16 flex flex-col justify-center items-center h-full size-12" 
+                    onClick = {() => sendMessage(receiverRef.current.value)}
+                >
+                    <IoMdSend />
+                </button>
             </div>
            </div>
         </div>
