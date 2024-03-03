@@ -7,6 +7,7 @@ const Home = () => {
   const inputRef = useRef(null);
 
   const handleGo = () => {
+    console.log("here");
     router.push('/chat/' + inputRef.current.value);
   }
 
@@ -17,7 +18,7 @@ const Home = () => {
           <div className = "">Enter your username</div>
           <input className = "border-[1px] border-1 border-slate-300 rounded-[4px] p-[8px] w-[200px]" type = "text" placeholder = "username" ref = {inputRef} />
         </div>
-        <button className = "bg-black text-white rounded-[8px] p-[8px] w-full hover:bg-slate-500 transition-colors duration-300" onClick={handleGo}>GO</button>
+        <button className = "bg-black text-white rounded-[8px] p-[8px] w-full hover:bg-slate-500 transition-colors duration-300" onClick={() => handleGo()}>GO</button>
       </div>
     </main>
   )
