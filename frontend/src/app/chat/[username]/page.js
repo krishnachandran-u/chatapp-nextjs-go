@@ -41,6 +41,7 @@ const Chat = ({params}) => {
 
             socket.send(JSON.stringify(message));
             inputRef.current.value = "";
+            console.log("message sent");
         }
     }
 
@@ -59,7 +60,7 @@ const Chat = ({params}) => {
             <input className = "border-[1px] border-1 border-slate-300 rounded-[4px] p-[8px] w-[200px]" type = "text" placeholder = "receiver" ref = {receiverRef} />
             <div className = "w-full flex flex-row gap-[10px]">
                 <input className = "border-[1px] border-1 border-slate-300 rounded-[4px] p-[8px] w-full" type = "text" placeholder = "message" ref = {inputRef}/>
-                <button className = "bg-black text-white rounded-[8px] p-[8px] hover:bg-slate-500 transition-colors duration-300" onClick = {sendMessage(receiverRef.current.value)}>send</button>
+                <button className = "bg-black text-white rounded-[8px] p-[8px] hover:bg-slate-500 transition-colors duration-300" onClick = {() => sendMessage(receiverRef.current.value)}>send</button>
             </div>
            </div>
         </div>
