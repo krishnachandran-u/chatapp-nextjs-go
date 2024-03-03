@@ -46,18 +46,18 @@ const Chat = ({params}) => {
     }
 
     return (
-        <div className = "bg-white w-screen h-screen text-black flex flex-col justify-between items-center p-[24px] gap-[16px]">
+        <div className = "bg-white w-screen h-screen text-black flex flex-col justify-between items-center p-[24px] gap-[16px] lg:p-[96px] md:text-2xl">
            <div className = "w-full bg-slate-100 overflow-y-scroll h-full rounded-[16px] p-[16px]">
                 {messages.map((message, index) => (
                     <div className = "border-[1px] border-black rounded-[8px] flex flex-col gap-[8px] p-[8px]">
-                        <div>Sender: {message.sender_id}</div>
-                        <div>Receiver: {message.receiver_id}</div>
-                        <div>Message: {message.content} </div>
+                        <div className = "md:text-base font-bold">Sender: {message.sender_id}</div>
+                        {/*<div className = "md:text-base">Receiver: {message.receiver_id}</div>*/}
+                        <div className = "md:text-2xl text-xl">Message: {message.content} </div>
                     </div>
                 ))}
             </div> 
            <div className = "bg-white flex flex-col justify-center items-start w-full gap-[16px]">
-            <input className = "border-[1px] border-1 border-slate-300 rounded-[4px] p-[8px] w-[200px]" type = "text" placeholder = "receiver" ref = {receiverRef} />
+            <input className = "border-[1px] border-1 border-slate-300 rounded-[4px] p-[8px] md:w-[500px] w-[200px]" type = "text" placeholder = "receiver" ref = {receiverRef} />
             <div className = "w-full flex flex-row gap-[10px]">
                 <input className = "border-[1px] border-1 border-slate-300 rounded-[4px] p-[8px] w-full" type = "text" placeholder = "message" ref = {inputRef}/>
                 <button className = "bg-black text-white rounded-[8px] p-[8px] hover:bg-slate-500 transition-colors duration-300" onClick = {() => sendMessage(receiverRef.current.value)}>send</button>
